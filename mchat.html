@@ -7,6 +7,7 @@
 </body>
 
 <template name="messages">
+{{> loginButtons}}
 	<ul>
 	  {{#each messages}}
   	  {{> message}}
@@ -20,6 +21,11 @@
 
 <template name="message">
 	<li>
+		<div class="message-header">
+			{{user.username}} <span class="time"> at {{time}}</span>
+		</div>
+		<div class ="message content">
 		{{message}}
+		</div>
 	</li>
 </template>

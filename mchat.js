@@ -8,18 +8,31 @@ if (Meteor.isClient) {
   });
 
   Template.messages.events({
-    'keypress textarea': function(e, instance){
+    'keypress textarea': function(e, event){
       if (e.keyCode == 13) { // enter key pressed
-        var value = instance.find('textarea').value;
-        instance.find('textarea').value = '';
+        var value = event.find('textarea').value;
+        event.find('textarea').value = '';
 
         Messages.insert({
           message: value,
-          timestamp: new Date()
-          // user: Meteor.userId()
+          timestamp: new Date(),
+          user: Meteor.userId()
         });
       }
     }
+  });
+
+  Template.message.helpers({
+    user: function() {
+      return Meteor.users.findOne({_id: this.user});
+    },
+    time: function(){
+      return moment(this.timestamp).format("h:mm a");
+    }
+  });
+
+  Accounts.ui.config({
+    passwordSignupFields: "USERNAME_AND_OPTIONAL_EMAIL"
   })
 }
 
