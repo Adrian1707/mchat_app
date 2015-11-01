@@ -10,6 +10,7 @@ if (Meteor.isClient) {
   Template.messages.events({
     'keypress textarea': function(e, event){
       if (e.keyCode == 13) { // enter key pressed
+        e.preventDefault();
         var value = event.find('textarea').value;
         event.find('textarea').value = '';
 
@@ -27,7 +28,7 @@ if (Meteor.isClient) {
       return Meteor.users.findOne({_id: this.user});
     },
     time: function(){
-      return moment(this.timestamp).format("h:mm a");
+      return moment(this.timestamp).format("h:mm a"); //this syntax requires the Meteor moments package. Run Meteor add momentjs:moment in the command line
     }
   });
 
