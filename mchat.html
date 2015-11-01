@@ -1,0 +1,22 @@
+<head>
+  <title>mchat</title>
+</head>
+
+<body>
+{{> messages}} 
+</body>
+
+<template name="messages">
+	<ul>
+	  {{#each message}}
+  	  {{> message}}
+  	  {{/each}}
+ 	</ul>
+</template>
+
+
+<template name="message">
+	<li>
+		{{message}}
+	</li>
+</template>
